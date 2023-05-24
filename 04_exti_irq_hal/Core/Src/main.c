@@ -175,6 +175,14 @@ static void MX_NVIC_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if (GPIO_Pin = GPIO_PIN_13)
+	  {
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	  }
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart->Instance==USART2){
@@ -190,9 +198,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim->Instance==TIM2){
-		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-	}
+//	if(htim->Instance==TIM2){ // GPIO EXTI 의 효과를 관찰하기 위해,
+//		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); // Timer 인터럽트가 발생하더라도 LED 동작을 하지 않도록 주석처리
+//	}
 
 }
 /* USER CODE END 4 */
